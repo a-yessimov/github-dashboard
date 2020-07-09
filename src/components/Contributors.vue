@@ -1,10 +1,9 @@
 <template>
-  <div class="contributors">
+  <div v-if="this.contributors.length" class="contributors">
     <div v-for="contributor in contributors" :key="contributor.id">
       <a :href="contributor.html_url" target="_blank">
         <img :src="contributor.avatar_url" />
       </a>
-      <!-- <span>{{contributor.contributions}}</span>-->
     </div>
   </div>
 </template>
@@ -20,7 +19,9 @@ export default {
   mounted() {
     fetch(this.contributorsUrl)
       .then(res => res.json())
-      .then(data => (this.contributors = data.slice(0, 10)));
+      .then(data => {
+        return (this.contributors = data.slice(0, 10));
+      });
   }
 };
 </script>

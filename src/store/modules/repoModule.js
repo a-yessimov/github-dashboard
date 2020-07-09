@@ -3,8 +3,8 @@ export default {
         currentRepo: {}
     }),
     actions: {
-        async requestRepo({ commit }) {
-            const res = await fetch(`https://api.github.com/repos/freeCodeCamp/freeCodeCamp`)
+        async requestRepo({ commit }, payload) {
+            const res = await fetch(`https://api.github.com/repos/${payload}`)
                 .then(response => response.json())
                 .then(data => data)
             commit('setCurrentRepo', res)

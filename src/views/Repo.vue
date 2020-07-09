@@ -36,9 +36,10 @@ export default {
     Languages
   },
   mounted() {
-    if (!Object.keys(this.currentRepo).length) {
-      this.$store.dispatch("requestRepo");
-    }
+    this.$store.dispatch("requestRepo", this.$route.query.name);
+  },
+  beforeDestroy() {
+    this.$store.commit("setCurrentRepo", {});
   }
 };
 </script>
@@ -73,7 +74,7 @@ img {
 .repo-b img {
   margin-right: 10px;
 }
-.repo-b a{
+.repo-b a {
   font-size: 24px;
 }
 </style>
